@@ -1,0 +1,106 @@
+Version: 2.0
+
+#########################
+# Alternatives Section
+#
+
+Alternatives: &alternatives
+  iPad Pro 12.9:
+    Wydajnosc: 10
+    Jakosc: 10
+    Styl: 10
+    Cena: 4396
+  iPad Pro 11:
+    Wydajnosc: 10
+    Jakosc: 10
+    Styl: 9
+    Cena: 3196
+  iPad Air:
+    Wydajnosc: 9
+    Jakosc: 9
+    Styl: 9
+    Cena: 2396
+  iPad Mini:
+    Wydajnosc: 8
+    Jakosc: 9
+    Styl: 8
+    Cena: 1596
+  iPad 10.2:
+    Wydajnosc: 8
+    Jakosc: 8
+    Styl: 8
+    Cena: 1316
+  iPad Pro 9.7:
+    Wydajnosc: 7
+    Jakosc: 8
+    Styl: 8
+    Cena: 2396
+  iPad 9.7:
+    Wydajnosc: 7
+    Jakosc: 7
+    Styl: 8
+    Cena: 1316
+  iPad Air 2:
+    Wydajnosc: 6
+    Jakosc: 7
+    Styl: 7
+    Cena: 1996
+  iPad Mini 4:
+    Wydajnosc: 6
+    Jakosc: 7
+    Styl: 7
+    Cena: 1596
+  iPad 4:
+    Wydajnosc: 5
+    Jakosc: 6
+    Styl: 7
+    Cena: 1596
+
+#
+# End of Alternatives Section
+#####################################
+
+#####################################
+# Goal Section
+#
+
+
+Goal:
+  name: Buy Tablet
+  description: >
+    This is a single decision maker problem. It models
+    the situation facing by a person who wants to buy a new tablet.
+  author: unknown
+  preferences:
+    pairwise:
+      - [Cena, Wydajnosc, 7]
+      - [Cena, Jakosc, 5]
+      - [Cena, Styl, 3]
+      - [Wydajnosc, Jakosc, 1]
+      - [Wydajnosc, Styl, 2]
+      - [Jakosc, Styl, 1/2]
+  children: 
+    Cena:
+      preferences: 
+        pairwiseFunction:
+          function(a1, a2) min(9, max(1/9, a1$Cena/a2$Cena))
+      children: *alternatives
+    Wydajnosc:
+      preferences: 
+        pairwiseFunction:
+          function(a1, a2) min(9, max(1/9, a2$Wydajnosc/a1$Wydajnosc))
+      children: *alternatives
+    Jakosc:
+      preferences:
+        pairwiseFunction:
+          function(a1, a2) min(9, max(1/9, a2$Jakosc/a1$Jakosc))
+      children: *alternatives
+    Styl:
+      preferences:
+        pairwiseFunction:
+          function(a1, a2) min(9, max(1/9, a2$Styl/a1$Styl))
+      children: *alternatives 
+
+#
+# End of Goal Section
+#####################################
